@@ -47,5 +47,4 @@ public class CreateUserApiParametrizedTests extends BaseApiHelper {
                 .assertThat()
                 .body("message", equalTo("Email, password and name are required fields"));
     }
-
 }

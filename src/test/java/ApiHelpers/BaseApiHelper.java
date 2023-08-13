@@ -1,14 +1,11 @@
 package ApiHelpers;
 
 import com.github.javafaker.Faker;
-
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.apache.http.auth.AUTH;
 import org.junit.Before;
 
-import static ApiHelpers.Urls.AUTH_USER;
-import static ApiHelpers.Urls.CREATE_USER;
+import static ApiHelpers.Urls.*;
 import static io.restassured.RestAssured.given;
 
 public class BaseApiHelper {
@@ -22,7 +19,7 @@ public class BaseApiHelper {
 
     public Response createUser() {
         Faker faker = new Faker();
-        String email = faker.name().firstName() + "@yandex.ru";
+        String email = faker.animal().name() + "@yandex.ru";
         CreateUserRequestModel userApiModel = new CreateUserRequestModel(email, "12345678", "name");
         Response response = given()
                 .header("Content-type", "application/json")
@@ -38,7 +35,7 @@ public class BaseApiHelper {
         return responseModel.getAccessToken();
     }
 
-    public String getUserEmail (Response response){
+    public String getUserEmail(Response response) {
         CreateUserResponseModel responseModel = response.as(CreateUserResponseModel.class);
         return responseModel.getUser().getEmail();
     }
