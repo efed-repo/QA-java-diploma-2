@@ -4,25 +4,25 @@ import org.junit.Test;
 
 public class CreateOrderTests extends BaseApiHelper {
 
-    //@Test
+    @Test
     @DisplayName("Создание заказа без авторизации,но с ингридиентами")
     public void createOrderWithoutAuthorizationTest(){
 
     }
 
-    //@Test
+    @Test
     @DisplayName("Создание заказа с авторизацией и ингридиентами")
     public void createOrderPositiveTest(){
 
     }
 
-   // @Test
+    @Test
     @DisplayName("Создание заказа с авторизацией, но без ингредиентов")
     public void createOrderWithoutIngredients(){
 
     }
 
-   // @Test
+    @Test
     @DisplayName("Создание заказа с авторизаций и невалидными хешами ингридиентов")
     public void createOrderWithInvalidIngredients(){
 
