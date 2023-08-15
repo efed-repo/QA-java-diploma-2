@@ -48,11 +48,11 @@ public class UserLoginTests extends BaseApiHelper {
     }
 
     private static Response login(LoginUserRequest loginUser) {
-        Response response = given()
+        return given()
                 .header("Content-type", "application/json")
+                .header("Accept","application/json")
                 .body(loginUser)
                 .when()
                 .post(USER_LOGIN);
-        return response;
     }
 }

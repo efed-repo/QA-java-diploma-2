@@ -5,6 +5,10 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.Before;
 
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
+
 import static ApiHelpers.Urls.*;
 import static io.restassured.RestAssured.given;
 
@@ -21,13 +25,12 @@ public class BaseApiHelper {
         Faker faker = new Faker();
         String email = faker.animal().name() + "@yandex.ru";
         CreateUserRequestModel userApiModel = new CreateUserRequestModel(email, "12345678", "name");
-        Response response = given()
+        return given()
                 .header("Content-type", "application/json")
                 .and()
                 .body(userApiModel)
                 .when()
                 .post(CREATE_USER);
-        return response;
     }
 
     public String getAccessToken(Response response) {
@@ -47,6 +50,16 @@ public class BaseApiHelper {
                 .when()
                 .delete(AUTH_USER)
                 .then().statusCode(202);
+    }
+
+    public String getIngredientsIds(){
+        Response response = given().when().get(INGREDIENTS);
+        List<GetIngredientsHelper> listOfObjects = response.jsonPath().getList("data", GetIngredientsHelper.class);
+        List<String> ids = listOfObjects.stream()
+                .map(GetIngredientsHelper::get_id)
+                .collect(Collectors.toList());
+        Random random = new Random();
+        return ids.get(random.nextInt(ids.size()));
     }
 
 }
