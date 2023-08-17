@@ -23,7 +23,6 @@ public class UserLoginTests extends BaseApiHelper {
         deleteUser(response);
     }
 
-
     @Test
     @DisplayName("Логин несуществующего юзера, негативный сценарий")
     public void unexistingUserLoginTest() {
@@ -50,7 +49,7 @@ public class UserLoginTests extends BaseApiHelper {
     private static Response login(LoginUserRequest loginUser) {
         return given()
                 .header("Content-type", "application/json")
-                .header("Accept","application/json")
+                .header("Accept", "application/json")
                 .body(loginUser)
                 .when()
                 .post(USER_LOGIN);

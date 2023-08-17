@@ -10,7 +10,7 @@ public class UpdateUserInfoTest extends BaseApiHelper {
 
     @Test
     @DisplayName("Обновление данных без авторизации")
-    public void updateUserInfoWithoutAuthorizationTest(){
+    public void updateUserInfoWithoutAuthorizationTest() {
         given().when().patch(AUTH_USER)
                 .then().statusCode(401)
                 .and()

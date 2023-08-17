@@ -14,16 +14,15 @@ import static io.restassured.RestAssured.given;
 
 public class BaseApiHelper {
 
+    private static final Faker faker = new Faker();
 
     @Before
     public void setUp() {
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site";
     }
 
-
     public Response createUser() {
-        Faker faker = new Faker();
-        String email = faker.animal().name() + "@yandex.ru";
+        String email = faker.letterify("????????????@yandex.ru");
         CreateUserRequestModel userApiModel = new CreateUserRequestModel(email, "12345678", "name");
         return given()
                 .header("Content-type", "application/json")
@@ -34,6 +33,7 @@ public class BaseApiHelper {
     }
 
     public String getAccessToken(Response response) {
+//        return response.then().extract().path("accessToken");
         CreateUserResponseModel responseModel = response.as(CreateUserResponseModel.class);
         return responseModel.getAccessToken();
     }
@@ -52,7 +52,7 @@ public class BaseApiHelper {
                 .then().statusCode(202);
     }
 
-    public String getIngredientsIds(){
+    public String getIngredientsIds() {
         Response response = given().when().get(INGREDIENTS);
         List<GetIngredientsHelper> listOfObjects = response.jsonPath().getList("data", GetIngredientsHelper.class);
         List<String> ids = listOfObjects.stream()

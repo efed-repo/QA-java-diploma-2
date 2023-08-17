@@ -22,7 +22,6 @@ public class CreateOrderTests extends BaseApiHelper {
                 .statusCode(200)
                 .and()
                 .assertThat().body("success", equalTo(true));
-
     }
 
     @Test
@@ -39,7 +38,7 @@ public class CreateOrderTests extends BaseApiHelper {
                 .assertThat().body("success", equalTo(true))
                 .and()
                 .assertThat().body("order.status", equalTo("done"));
-        deleteUser(response);
+        deleteUser(responsePreparation);
     }
 
     @Test
@@ -76,7 +75,6 @@ public class CreateOrderTests extends BaseApiHelper {
         return given().header("Authorization", token)
                 .and()
                 .header("Content-type", "application/json")
-                .header("Accept","application/json")
                 .body(json)
                 .when()
                 .post(ORDERS);

@@ -28,7 +28,7 @@ public class UpdateUserInfoParametrizedTests extends BaseApiHelper {
 
     @Test
     @DisplayName("Обновление данных авторизованного пользователя")
-    public void updateAuthorizationUserInfoTest(){
+    public void updateAuthorizationUserInfoTest() {
         Response response = createUser();
         String token = getAccessToken(response);
         given().header("Authorization", token)

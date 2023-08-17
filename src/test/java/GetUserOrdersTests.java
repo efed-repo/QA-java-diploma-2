@@ -5,31 +5,30 @@ import org.junit.Test;
 
 import static ApiHelpers.Urls.ORDERS;
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class GetUserOrdersTests extends BaseApiHelper {
     @Test
     @DisplayName("Получение заказа без авторизации, негативный кейс")
-    public void getUserOrderWithoutAuthorizationTest(){
+    public void getUserOrderWithoutAuthorizationTest() {
         given().when().get(ORDERS)
                 .then()
                 .statusCode(401)
                 .and()
-                .assertThat().body("message",equalTo("You should be authorised"));
+                .assertThat().body("message", equalTo("You should be authorised"));
 
     }
 
     @Test
     @DisplayName("Получение заказа авторизованого пользователя, позитивный кейс")
-    public void getUserOrderTest(){
+    public void getUserOrderTest() {
         Response response = createUser();
         String token = getAccessToken(response);
         given().header("Authorization", token)
-        .when().get(ORDERS)
+                .when().get(ORDERS)
                 .then().statusCode(200)
                 .and()
-                .assertThat().body("success",equalTo(true));
+                .assertThat().body("success", equalTo(true));
         deleteUser(response);
     }
 }
