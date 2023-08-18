@@ -33,7 +33,6 @@ public class BaseApiHelper {
     }
 
     public String getAccessToken(Response response) {
-//        return response.then().extract().path("accessToken");
         CreateUserResponseModel responseModel = response.as(CreateUserResponseModel.class);
         return responseModel.getAccessToken();
     }

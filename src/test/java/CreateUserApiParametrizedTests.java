@@ -24,7 +24,7 @@ public class CreateUserApiParametrizedTests extends BaseApiHelper {
     }
 
     @Parameterized.Parameters(name = "Создание курьера без одного обязательного параметра: {0} {1} {2}")
-    public static Object[][] createCourierData() {
+    public static Object[][] createRequestBody() {
         return new Object[][]{
                 {"", "123456", "withoutLogin"},
                 {"withoutPassword@yandex.ru", "", "courierName"},

@@ -25,7 +25,7 @@ public class UserLoginTests extends BaseApiHelper {
 
     @Test
     @DisplayName("Логин несуществующего юзера, негативный сценарий")
-    public void unexistingUserLoginTest() {
+    public void unexcitingUserLoginTest() {
         LoginUserRequest loginUser = new LoginUserRequest("IncorrectUser_1@rrr.ru", "12345678");
         Response response = login(loginUser);
         response.then().statusCode(401)

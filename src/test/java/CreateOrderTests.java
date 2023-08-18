@@ -13,10 +13,10 @@ public class CreateOrderTests extends BaseApiHelper {
     @DisplayName("Создание заказа без авторизации,но с ингридиентами")
     public void createOrderWithoutAuthorizationTest() {
         String id = getIngredientsIds();
-        String json = "{\"ingredients\": [\"" + id + "\"]}";
+        String requestBody = "{\"ingredients\": [\"" + id + "\"]}";
         given()
                 .header("Content-type", "application/json")
-                .body(json)
+                .body(requestBody)
                 .when()
                 .post(ORDERS).then()
                 .statusCode(200)
@@ -28,10 +28,10 @@ public class CreateOrderTests extends BaseApiHelper {
     @DisplayName("Создание заказа с авторизацией и ингридиентами")
     public void createOrderPositiveTest() {
         String id = getIngredientsIds();
-        String json = "{\"ingredients\": [\"" + id + "\"]}";
+        String requestBody = "{\"ingredients\": [\"" + id + "\"]}";
         Response responsePreparation = createUser();
         String token = getAccessToken(responsePreparation);
-        Response response = createOrder(token, json);
+        Response response = createOrder(token, requestBody);
         response.then()
                 .statusCode(200)
                 .and()
@@ -44,10 +44,10 @@ public class CreateOrderTests extends BaseApiHelper {
     @Test
     @DisplayName("Создание заказа с авторизацией, но без ингредиентов")
     public void createOrderWithoutIngredients() {
-        String json = "{}";
+        String requestBody = "{}";
         Response responsePreparation = createUser();
         String token = getAccessToken(responsePreparation);
-        Response response = createOrder(token, json);
+        Response response = createOrder(token, requestBody);
         response.then()
                 .statusCode(400)
                 .and()
@@ -59,10 +59,10 @@ public class CreateOrderTests extends BaseApiHelper {
     @Test
     @DisplayName("Создание заказа с авторизаций и невалидными хешами ингридиентов")
     public void createOrderWithInvalidIngredients() {
-        String json = "{\"ingredients\" : [\"61c0c5a71d1f820010000000\"]}";
+        String requestBody = "{\"ingredients\" : [\"61c0c5a71d1f820010000000\"]}";
         Response responsePreparation = createUser();
         String token = getAccessToken(responsePreparation);
-        Response response = createOrder(token, json);
+        Response response = createOrder(token, requestBody);
         response.then()
                 .statusCode(400)
                 .and()

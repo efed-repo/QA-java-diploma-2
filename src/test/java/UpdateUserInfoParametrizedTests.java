@@ -19,7 +19,7 @@ public class UpdateUserInfoParametrizedTests extends BaseApiHelper {
     }
 
     @Parameterized.Parameters(name = "Обновление данных пользователя: {0}")
-    public static Object[][] createOrderData() {
+    public static Object[][] createOrderRequest() {
         return new Object[][]{
                 {"{ \"name\": \"new_name\"}"},
                 {"{ \"email\": \"new_email@yandex.ru\"}"}
